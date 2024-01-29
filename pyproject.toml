@@ -9,6 +9,7 @@ readme = "README.md"
 python = "^3.12"
 django = "^5.0.1"
 python-decouple = "^3.8"
+psycopg2-binary = "^2.9.9"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.0"
@@ -46,3 +47,4 @@ pre_test = "task lint"
 test = "pytest -s -x --cov=statbov -vv"
 post_test = "coverage run -m pytest && coverage html"
 pre-commit = "task lint && task test"
+export-requirements = "rm requirements.txt && poetry export -f requirements.txt --output requirements.txt --without-hashes --without dev"
