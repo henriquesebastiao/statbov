@@ -54,7 +54,7 @@ jobs:
           python manage.py collectstatic --noinput
           python manage.py check
           python manage.py migrate
-          pytest -m "not functional_test" -s -x --cov=project -vv
+          pytest -m "not functional_test" -s -x --cov=statbov -vv
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         env:
