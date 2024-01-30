@@ -18,6 +18,8 @@ taskipy = "^1.12.2"
 blue = "^0.9.1"
 ruff = "^0.1.14"
 isort = "^5.13.2"
+pytest-django = "^4.7.0"
+selenium = "^4.17.2"
 
 [build-system]
 requires = ["poetry-core"]
@@ -25,19 +27,32 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
 line-length = 79
+exclude = ['migrations']
 
 [tool.isort]
 profile = "django"
 line_length = 79
+extend_skip = ['migrations']
+
+[tool.blue]
+extend-exclude = '(migrations/)'
 
 [tool.coverage.run]
 branch = true
-omit = ["**/*test*.py"]
+omit = ["**/*test*.py", "manage.py", "**/migrations/*", "**/project/*.py"]
+
+[tool.coverage.html]
+directory = "htmlcov"
 
 [tool.pytest.ini_options]
 pythonpath = "."
-addopts = "--doctest-modules"
+DJANGO_SETTINGS_MODULE = "statbov.settings"
 python_files = "test.py tests.py test_*.py tests_*.py *_test.py *_tests.py"
+addopts = "--strict-markers -v"
+norecursedirs = "dist build .* data venv"
+markers = [
+    "functional_test: Run tests that are selenium based",
+]
 
 [tool.taskipy.tasks]
 lint = "ruff . && blue --check . --diff && isort --check --diff ."
@@ -46,5 +61,6 @@ run = "python manage.py runserver"
 pre_test = "task lint"
 test = "pytest -s -x --cov=statbov -vv"
 post_test = "coverage run -m pytest && coverage html"
-pre-commit = "task lint && task test"
+functional-test = 'pytest -m "functional_test"'
+pre-commit = "python manage.py makemigrations && task test && task functional-test && task export-requirements"
 export-requirements = "rm requirements.txt && poetry export -f requirements.txt --output requirements.txt --without-hashes --without dev"

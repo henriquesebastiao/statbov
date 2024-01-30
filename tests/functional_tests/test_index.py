@@ -1,0 +1,18 @@
+from ._utils import FunctionalTestBase
+
+
+class IndexFunctionalTest(FunctionalTestBase):
+    def test_content_index_page(self):
+        content = self.get_content('header', url='/')
+        words = [
+            'Statbov',
+            'Início',
+            'Planos',
+            'Blog',
+            'Suporte',
+            'Sobre nós',
+            'Entrar',
+            'Registrar',
+        ]
+        for word in words:
+            self.assertIn(word, content.text)
