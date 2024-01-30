@@ -1,6 +1,6 @@
 # Statbov
 
-Statbov é um projeto para pecuária de precisão com analisa de métricas.
+Statbov é um projeto para pecuária de precisão com análise de métricas.
 
 ## Executando localmente
 
