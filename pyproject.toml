@@ -10,6 +10,7 @@ python = "^3.12"
 django = "^5.0.1"
 python-decouple = "^3.8"
 psycopg2-binary = "^2.9.9"
+fontawesomefree = "^6.5.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.0"
