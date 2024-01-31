@@ -7,6 +7,16 @@
             <a class="fs-1 fw-bold text-decoration-none text-white" tabindex="-1" href="{% url 'index' %}">Statbov</a>
             <div class="fs-4 mb-3 user-select-none">{% block call_to_action %}{% endblock %}</div>
         </div>
+        <!-- Messages -->
+        <div>
+            {% if messages %}
+            	{% for message in messages %}
+                    <div class="text-center {{ message.tags }}">
+                        {{ message }}
+                    </div>
+            	{% endfor %}
+            {% endif %} 
+        </div>
         <form action="{% block form_action %}{% endblock %}" method="post">
             {% csrf_token %}
             <div class="input-group">

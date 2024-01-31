@@ -9,7 +9,7 @@ from ..forms.signup import SignupForm
 class SignupView(FormView):
     template_name = 'signup.html'
     form_class = SignupForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('login')
 
     def form_valid(self, form):
         self.request.session['signup_form_data'] = form.cleaned_data
@@ -19,7 +19,7 @@ class SignupView(FormView):
 class UserCreateView(CreateView):
     template_name = 'signup.html'
     form_class = SignupForm
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('login')
 
     def get(self, request, *args, **kwargs):
         raise Http404
@@ -32,5 +32,18 @@ class UserCreateView(CreateView):
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        messages.error(self.request, 'Erro ao criar usuário.')
+        if (
+            'username' in form.errors
+            and form.cleaned_data.get('username') is None
+        ):
+            messages.error(self.request, form.errors['username'][0])
+        elif (
+            'password' in form.errors
+            and form.cleaned_data.get('password') is None
+        ):
+            messages.error(self.request, form.errors['password'][0])
+        else:
+            messages.error(
+                self.request, 'Erro ao criar usuário, tente novamente.'
+            )
         return super().form_invalid(form)

@@ -32,6 +32,9 @@ class SignupForm(forms.ModelForm):
     username = forms.CharField(
         required=True,
         label='Nome de usuário',
+        error_messages={
+            'required': 'O nome de usuário não pode ficar em branco.',
+        },
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control rounded-bottom-0',
@@ -44,6 +47,12 @@ class SignupForm(forms.ModelForm):
         required=True,
         label='Senha',
         validators=[strong_password],
+        error_messages={
+            'invalid': 'A senha deve ter pelo menos um caractere maiúsculo, '
+            'um minúsculo, um número e um caractere especial. '
+            'O tamanho deve ser de pelo menos 8 caracteres.',
+            'required': 'A senha não pode ficar em branco.',
+        },
         widget=forms.PasswordInput(
             attrs={
                 'class': 'form-control rounded-top-0 border-top-0 border-end-0',
@@ -62,3 +71,12 @@ class SignupForm(forms.ModelForm):
             'username': 'Nome de usuário',
             'password': 'Senha',
         }
+
+    def clean_username(self):
+        """Validates that the email is unique"""
+        username = self.cleaned_data['username']
+        if get_user_model().objects.filter(username=username).exists():
+            raise ValidationError(
+                'Esse nome de usuário já existe.', code='invalid'
+            )
+        return username
