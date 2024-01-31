@@ -1,0 +1,22 @@
+{% extends 'base/login_signup.html' %}
+{% block title %}
+    🗳️ Login | Statbov
+{% endblock %}
+{% block call_to_action %}
+    Login
+{% endblock %}
+{% block form_action %}
+    {% url 'login_create' %}
+{% endblock %}
+{% block text_button %}
+    Entrar
+{% endblock %}
+{% block question_text %}
+    Não possui uma conta?
+{% endblock %}
+{% block link_redirect %}
+    {% url 'signup' %}
+{% endblock %}
+{% block text_link_redirect %}
+    Registre-se
+{% endblock %}
