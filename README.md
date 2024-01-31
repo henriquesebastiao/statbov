@@ -17,7 +17,7 @@ poetry install
 poetry shell
 ```
 
-Configure as variáveis de ambientes descritas na seção [Variáveis de ambiente](#variáveis-de-ambiente) e execute o Docker Compose:
+Configure as variáveis de ambientes descritas na seção [Dicas para desenvolvimento](CONTRIBUTING.md#dicas-para-desenvolvimento) e execute o Docker Compose:
 
 ```bash
 docker-compose up -d
