@@ -28,7 +28,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
 line-length = 79
-exclude = ['migrations']
+exclude = ['migrations', '__init__.py']
 
 [tool.isort]
 profile = "django"

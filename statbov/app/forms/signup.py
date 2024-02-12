@@ -2,8 +2,9 @@ import re
 from dataclasses import dataclass
 
 from django import forms
-from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
+
+from ..models import CustomUser
 
 
 def strong_password(password):
@@ -64,7 +65,7 @@ class SignupForm(forms.ModelForm):
 
     @dataclass
     class Meta:
-        model = get_user_model()
+        model = CustomUser
         fields = ['username', 'password']
 
         labels = {
@@ -75,7 +76,7 @@ class SignupForm(forms.ModelForm):
     def clean_username(self):
         """Validates that the email is unique"""
         username = self.cleaned_data['username']
-        if get_user_model().objects.filter(username=username).exists():
+        if CustomUser.objects.filter(username=username).exists():
             raise ValidationError(
                 'Esse nome de usuário já existe.', code='invalid'
             )

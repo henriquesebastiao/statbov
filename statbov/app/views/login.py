@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.views.generic import FormView
 
-from ..forms.login import LoginForm
+from ..forms import LoginForm
 
 
 class LoginView(FormView):

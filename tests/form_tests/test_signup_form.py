@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from statbov.app.forms.signup import SignupForm
+from statbov.app.forms import SignupForm
 
 
 class SignupTestForm(TestCase):

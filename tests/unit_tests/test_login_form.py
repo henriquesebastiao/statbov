@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from statbov.app.forms.login import LoginForm
+from statbov.app.forms import LoginForm
 
 
 class LoginFormUnitTest(TestCase):

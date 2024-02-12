@@ -3,7 +3,7 @@ from django.http import Http404
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, FormView
 
-from ..forms.signup import SignupForm
+from ..forms import SignupForm
 
 
 class SignupView(FormView):

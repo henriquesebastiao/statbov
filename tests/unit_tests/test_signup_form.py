@@ -1,7 +1,7 @@
 from django.test import TestCase, TestCase as DjangoTesteCase
 from django.urls import reverse
 
-from statbov.app.forms.signup import SignupForm
+from statbov.app.forms import SignupForm
 
 
 class SignupFormUnitTest(TestCase):
@@ -33,8 +33,12 @@ class SignupFormUnitTest(TestCase):
 class SignupFormIntegrationTeste(DjangoTesteCase):
     def setUp(self):
         self.form_data = {
-            'username': 'user',
-            'password': '1234abCD@',
+            'username': 'testuser',
+            'last_name': 'User',
+            'email': 'testuser@example.com',
+            'birth_date': '1990-01-01',
+            'password': 'testpassword',
+            'gender': 'M',
         }
         return super().setUp()
 
