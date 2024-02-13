@@ -1,5 +1,8 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% block extend_head %}
+	<link href="{% static 'css/login_signup.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
 {% block body %}
     <body class="align-items-center">
     <div class="login-container position-absolute top-50 start-50 translate-middle">
@@ -19,10 +22,20 @@
         </div>
         <form action="{% block form_action %}{% endblock %}" method="post">
             {% csrf_token %}
+            <div class="input-group col-md-2">
+                <div class="form-floating">
+                    {{ form.first_name }}
+                    <label for="floatingInput1 {{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+                </div>
+                <div class="form-floating">
+                    {{ form.last_name }}
+                    <label for="floatingInput1 {{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+                </div>
+            </div>
             <div class="input-group">
                 <div class="form-floating">
-                    {{ form.username }}
-                    <label for="floatingInputGroup1 {{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                    {{ form.email }}
+                    <label for="floatingInputGroup1 {{ form.email.id_for_label }}">{{ form.email.label }}</label>
                 </div>
             </div>
             <div class="input-group">

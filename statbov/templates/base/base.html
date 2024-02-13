@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{% endblock %}</title>
     {% include 'partials/head.html' %}
+    {% block extend_head %}{% endblock %}
 </head>
 {% block body %}{% endblock %}
 </html>

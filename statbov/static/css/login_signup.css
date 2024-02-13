@@ -22,14 +22,14 @@
 /* Large tablets/laptops */
 @media (min-width: 992px) and (max-width: 1199px) {
     .login-container {
-        width: 300px;
+        width: 400px;
     }
 }
 
 /* Desktops, notebooks hd */
 @media (min-width: 1200px) and (max-width: 1919px) {
     .login-container {
-        width: 300px;
+        width: 400px;
     }
 }
 
