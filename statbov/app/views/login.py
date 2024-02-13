@@ -19,7 +19,7 @@ class LoginCreateView(FormView):
     def form_valid(self, form):
         authenticate_user = authenticate(
             self.request,
-            username=form.cleaned_data.get('username', ''),
+            email=form.cleaned_data.get('email', ''),
             password=form.cleaned_data.get('password', ''),
         )
 

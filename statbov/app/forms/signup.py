@@ -30,17 +30,46 @@ def strong_password(password):
 
 
 class SignupForm(forms.ModelForm):
-    username = forms.CharField(
+    first_name = forms.CharField(
         required=True,
-        label='Nome de usuário',
+        label='Nome',
         error_messages={
-            'required': 'O nome de usuário não pode ficar em branco.',
+            'required': 'O nome não pode ficar em branco.',
         },
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control rounded-bottom-0',
-                'id': 'floatingInputGroup1',
-                'placeholder': 'Nome de usuário',
+                'class': 'form-control rounded-bottom-0 border-bottom-0',
+                'id': 'floatingInput',
+                'placeholder': 'Nome',
+            }
+        ),
+    )
+    last_name = forms.CharField(
+        required=True,
+        label='Sobrenome',
+        error_messages={
+            'required': 'O sobrenome não pode ficar em branco.',
+        },
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control rounded-bottom-0 border-bottom-0',
+                'id': 'floatingInput',
+                'placeholder': 'Sobrenome',
+            }
+        ),
+    )
+    email = forms.EmailField(
+        required=True,
+        label='Email',
+        error_messages={
+            'invalid': 'O e-mail é inválido.',
+            'required': 'O e-mail não pode ficar em branco.',
+        },
+        widget=forms.EmailInput(
+            attrs={
+                'class': 'form-control rounded-0',
+                'id': 'floatingInput',
+                'placeholder': 'Email',
             }
         ),
     )
@@ -66,18 +95,25 @@ class SignupForm(forms.ModelForm):
     @dataclass
     class Meta:
         model = CustomUser
-        fields = ['username', 'password']
+        fields = [
+            'first_name',
+            'last_name',
+            'email',
+            'password',
+        ]
 
         labels = {
-            'username': 'Nome de usuário',
+            'first_name': 'Nome',
+            'last_name': 'Sobrenome',
+            'email': 'E-mail',
             'password': 'Senha',
         }
 
-    def clean_username(self):
+    def clean_email(self):
         """Validates that the email is unique"""
-        username = self.cleaned_data['username']
-        if CustomUser.objects.filter(username=username).exists():
+        email = self.cleaned_data['email']
+        if CustomUser.objects.filter(email=email).exists():
             raise ValidationError(
-                'Esse nome de usuário já existe.', code='invalid'
+                'Já existe um usuário com este e-mail.', code='invalid'
             )
-        return username
+        return email

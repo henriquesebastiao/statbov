@@ -2,14 +2,15 @@ from django import forms
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(
+    email = forms.CharField(
         required=True,
-        label='Nome de usuário',
-        widget=forms.TextInput(
+        label='Email',
+        widget=forms.EmailInput(
             attrs={
                 'class': 'form-control rounded-bottom-0',
                 'id': 'floatingInputGroup1',
-                'placeholder': 'Nome de usuário',
+                'placeholder': 'Email',
+                'autofocus': True,
             }
         ),
     )

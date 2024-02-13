@@ -32,11 +32,8 @@ class UserCreateView(CreateView):
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        if (
-            'username' in form.errors
-            and form.cleaned_data.get('username') is None
-        ):
-            messages.error(self.request, form.errors['username'][0])
+        if 'email' in form.errors and form.cleaned_data.get('email') is None:
+            messages.error(self.request, form.errors['email'][0])
         elif (
             'password' in form.errors
             and form.cleaned_data.get('password') is None
