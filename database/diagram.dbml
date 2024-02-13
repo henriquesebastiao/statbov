@@ -1,0 +1,171 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Project statbov {
+  database_type: 'PostgreSQL'
+  Note: 'Uma plataforma para análise estatística de desempenho da produção de rebanhos bovinos desenvolvida com Django e Bootstrap.'
+}
+
+Table employment [note: "Verificar o que e mais interessante: possibilitar que o fazendeiro registre os cargos possiveis para suas fazendas. Ou se mais viavel que esse campo seja um ENUM, isso poderia ate economizar espaco no banco."] {
+  id bigserial [pk] // 4 bytes
+  position varchar(20) [not null] // max 20 bytes
+  description text [not null]
+}
+
+Table user_phone {
+  id bigserial [pk] // 8 bytes
+  phone varchar(11) [unique] // max 11 bytes
+  user_id bigserial [ref: > user.id] // 8 bytes
+  phone_type phone_type_options [not null] // 4 bytes
+}
+
+Enum phone_type_options {
+  celular
+  residencial
+  trabalho
+}
+
+// Verificar na normalizacao
+Table employment_user {
+  id bigserial [pk] // 8 bytes
+  employment_id bigserial // 8 bytes
+  user_id bigserial // 8 bytes
+}
+
+Ref: employment_user.employment_id > employment.id [delete: protect]
+Ref: employment_user.user_id - user.id [delete: cascade]
+
+Table user {
+  id bigserial [pk]
+  first_name varchar(20) [not null] // max 20 bytes
+  last_name varchar(50) [not null] // max 50 bytes
+  email varchar(254) [not null, unique] // max 254 bytes
+  password varchar(254) [not null] // max 254 bytes
+  gender char(1) [not null] // 1 byte
+  birth_date date [not null] // 4 bytes
+}
+
+Table user_address {
+  id bigserial [pk] // 8 bytes
+  street varchar(50) [not null] // max 50 bytes
+  number smallserial [not null] // 2 bytes
+  cep varchar(8) [not null] // max 8 bytes
+  neighborhood varchar(20) [not null] // max 20 bytes
+  city varchar(20) [not null] // max 20 bytes
+  state char(2) [not null] // 2 bytes
+  user_id bigserial [not null, ref: > user.id] // 8 bytes
+}
+
+Table farmer {
+  id bigserial [pk] // 8 bytes
+  user_id bigserial [not null, unique, ref: - user.id] // 8 bytes
+  cpf varchar(11) [not null, unique] // 11 bytes
+  entry_date date [not null, default: `now()`] // 4 bytes
+  farmer_plan plan_options [not null] // 4 bytes
+}
+
+Enum plan_options {
+  free
+  starter
+  medium
+  pro
+}
+
+Table farm [note: "Origem: Dado com relevância média, (depende da propriedade), sendo as opções “nascimento” quando o animal for nascido na propriedade e podendo ter outras opções que podem ser preenchidas na hora o que eu acredito que pode dar muito trabalho fazendo um por um, em casos de cadastramento de muitas cabeças frutos de compras. Então no meu ver se possível poderíamos possibilitar o produtor cadastrar uma opção de origem do animal ex: “Fazenda Boa Esperança”. Sendo assim o produtor só selecionaria essa opção em cada cadastramento ao invés de ter que escrever isso no cadastramento de cada animal."] {
+  id bigserial [pk] // 8 bytes
+  name varchar(30) [not null] // max 30 bytes
+  farmer_id bigserial [not null, ref: > farmer.id] // 8 bytes
+}
+
+Table farm_user {
+  farm_id bigserial [pk, ref: > farm.id] // 8 bytes
+  user_id bigserial [pk, ref: - user.id] // 8 bytes
+}
+
+Table batch [note: "Lote: Grupo de animais no qual o mesmo está separado/dividido, da mesma maneira do anterior acredito que é importante possibilitar o produtor cadastrar os lotes para ficar só como opção e não precise escrever toda hora par que seja práticoere "] {
+  id varchar(10) [pk, unique] // max 10 bytes
+  farm_id bigserial [pk, ref: > farm.id] // 8 bytes
+  diet_id bigserial [not null, ref: > diet.id] // 8 bytes
+  obs varchar(254) // max 254 bytes
+}
+
+// Improve implementation
+Table batch_log [note: "Rota de adicionar Animal, também vai adiciona um novo registro na tabela histórico Lote com a data de entrada do animal e o ID do lote"] {
+  animal_id bigserial [pk, ref: > animal.id]
+  batch_id bigserial [pk, ref: > batch.id]
+  entry_date_batch date [not null] // 4 bytes
+  exit_date_batch date // 4 bytes
+}
+
+Table diet [note: "Lote: Grupo de animais no qual o mesmo está separado/dividido, da mesma maneira do anterior acredito que é importante possibilitar o produtor cadastrar os lotes para ficar só como opção e não precise escrever toda hora par que seja práticoere "] {
+  id bigserial [pk] // 8 bytes
+  name varchar(20) [not null] // max 20 bytes
+  description varchar(254) [not null] // max 254 bytes
+}
+
+// Improve implementation
+Table diet_log {
+  diet_id bigserial [pk, ref: > diet.id] // 8 bytes
+  batch_id bigserial [pk, ref: > batch.id] // 8 bytes
+  init_date date [not null] // 4 bytes
+  end_date date // 4 bytes
+}
+
+Table animal {
+  id varchar(15) [pk, unique, note: "Este é o identificador do animal, armazena um valor de até 15 caracteres, o que é compatível com brincos eletrônicos e a numeração SISBOV. No entanto, caso essas tecnologias não sejam usadas, você pode usar brincos de manejo ou até as mesmas identificações mais simplistas neste mesmo campo. Mas é obrigatório que haja uma identificação."] // 15 bytes
+  farm_origin_id bigserial [ref: > farm.id] // 8 bytes
+  race race_option [not null] // 4 bytes
+  mother_id bigserial [ref: < animal.id, note: "Dado importante em fazendas de cria (Que produzem bezerros para venda) dando a opção de inserir ID ou Nome da mãe/matriz e pai."] // 8 bytes
+  father_id bigserial [ref: < animal.id] // 8 bytes
+  gender varchar(1) [not null] // 1 byte
+  entry_date date [not null, default: `now()`] // 4 bytes
+  exit_date date // 4 bytes
+  reason_leaving reason_leaving_options // 4 bytes
+}
+
+Enum reason_leaving_options {
+  sale
+  death
+  slaughter
+}
+
+Enum race_option {
+  nelore
+  girolando
+  guzera
+  holandes
+  senepol
+  gir_leiteiro
+}
+
+Table weight_log {
+  id bigserial [pk]
+  animal_id varchar(15) [ref: > animal.id] // 8 bytes
+  date date [not null] // 4 bytes
+  weight numeric(5, 2) [not null] // 8 bytes
+  topic weight_topic [not null] // 4 bytes
+}
+
+Enum weight_topic {
+  routine
+  weaning
+  birth
+}
+
+Table log {
+  id bigserial [pk] // 8 bytes
+  user_id bigserial [not null, ref: > user.id] // 8 bytes
+  datetime timestamp [not null] // 8 bytes
+  action varchar(20) [not null] // max 20 bytes
+  description varchar(254) [not null] // max 254 bytes
+}
+
+Table todo {
+  id bigserial [pk] // 8 bytes
+  title varchar(50) [not null] // max 50 bytes
+  description varchar(254) // max 254 bytes
+  creator bigserial [not null, ref: > user.id] // 8 bytes
+  responsible bigserial [not null, ref: > user.id] // 8 bytes
+  creation_date datetime [default: `now()`, not null] // 8 bytes
+  done bool [default: false, not null] // 1 byte
+}
