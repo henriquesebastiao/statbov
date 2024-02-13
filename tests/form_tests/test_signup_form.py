@@ -3,10 +3,12 @@ from django.test import TestCase
 from statbov.app.forms import SignupForm
 
 
-class SignupTestForm(TestCase):
+class SignupTestFormBase(TestCase):
     data = {
-        'username': 'testuser',
-        'password': 'Test123@',
+        'first_name': 'Test',
+        'last_name': 'User',
+        'email': 'testuser@example.com',
+        'password': 'Test@1234',
     }
 
     def mixin_validate_form(
@@ -19,10 +21,14 @@ class SignupTestForm(TestCase):
 
         return SignupForm(data=data)
 
+
+class SignupTestForm(SignupTestFormBase):
     def test_signup_valid_form(self):
         form = SignupForm(data=self.data)
         self.assertTrue(form.is_valid())
 
+
+class SignupTestFormPassword(SignupTestFormBase):
     def test_signup_invalid_form_witch_weak_password(self):
         form = self.mixin_validate_form('test', 'password')
         self.assertFalse(form.is_valid())
@@ -59,6 +65,24 @@ class SignupTestForm(TestCase):
         form = self.mixin_validate_form('Test1234', 'password')
         self.assertFalse(form.is_valid())
 
-    def test_signup_invalid_form_witch_blank_username(self):
-        form = self.mixin_validate_form('', 'username')
+
+class SignupTestFormFirstName(SignupTestFormBase):
+    def test_signup_invalid_form_witch_blank_first_name(self):
+        form = self.mixin_validate_form('', 'first_name')
+        self.assertFalse(form.is_valid())
+
+
+class SignupTestFormLastName(SignupTestFormBase):
+    def test_signup_invalid_form_witch_blank_last_name(self):
+        form = self.mixin_validate_form('', 'last_name')
+        self.assertFalse(form.is_valid())
+
+
+class SignupTestFormEmail(SignupTestFormBase):
+    def test_signup_invalid_form_witch_blank_email(self):
+        form = self.mixin_validate_form('', 'email')
+        self.assertFalse(form.is_valid())
+
+    def test_signup_invalid_form_witch_invalid_email(self):
+        form = self.mixin_validate_form('testuser', 'email')
         self.assertFalse(form.is_valid())

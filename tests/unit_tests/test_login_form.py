@@ -4,15 +4,15 @@ from statbov.app.forms import LoginForm
 
 
 class LoginFormUnitTest(TestCase):
-    USERNAME_TEXT = 'Nome de usuário'
+    USERNAME_TEXT = 'Email'
     PASSWORD_TEXT = 'Senha'
 
     def setUp(self):
         self.form = LoginForm()
 
     # Test placeholders
-    def test_username_placeholder_is_correct(self):
-        placeholder = self.form.fields['username'].widget.attrs['placeholder']
+    def test_email_placeholder_is_correct(self):
+        placeholder = self.form.fields['email'].widget.attrs['placeholder']
         self.assertEqual(self.USERNAME_TEXT, placeholder)
 
     def test_password_placeholder_is_correct(self):
@@ -20,8 +20,8 @@ class LoginFormUnitTest(TestCase):
         self.assertEqual(self.PASSWORD_TEXT, placeholder)
 
     # Test labels
-    def test_username_label_is_correct(self):
-        label = self.form.fields['username'].label
+    def test_email_label_is_correct(self):
+        label = self.form.fields['email'].label
         self.assertEqual(self.USERNAME_TEXT, label)
 
     def test_password_label_is_correct(self):

@@ -5,7 +5,7 @@ from statbov.app.forms import LoginForm
 
 class LoginTestForm(TestCase):
     data = {
-        'username': 'test',
+        'email': 'test@user.com',
         'password': 'Test@1234',
     }
 
@@ -23,14 +23,14 @@ class LoginTestForm(TestCase):
         form = LoginForm(data=self.data)
         self.assertTrue(form.is_valid())
 
-    def test_login_invalid_form_witch_blank_username(self):
-        form = self.mixin_validate_form('', 'username')
+    def test_login_invalid_form_witch_blank_email(self):
+        form = self.mixin_validate_form('', 'email')
         self.assertFalse(form.is_valid())
 
     def test_login_invalid_form_witch_blank_password(self):
         form = self.mixin_validate_form('', 'password')
         self.assertFalse(form.is_valid())
 
-    def test_login_invalid_form_witch_blank_username_and_password(self):
-        form = self.mixin_validate_form('', 'username', 'password')
+    def test_login_invalid_form_witch_blank_email_and_password(self):
+        form = self.mixin_validate_form('', 'email', 'password')
         self.assertFalse(form.is_valid())

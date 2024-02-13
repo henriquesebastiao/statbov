@@ -5,25 +5,25 @@ from statbov.app.forms import SignupForm
 
 
 class SignupFormUnitTest(TestCase):
-    USERNAME_TEXT = 'Nome de usuário'
+    EMAIL_TEXT = 'Email'
     PASSWORD_TEXT = 'Senha'
 
     def setUp(self):
         self.form = SignupForm()
 
     # Test placeholders
-    def test_username_placeholder_is_correct(self):
-        placeholder = self.form.fields['username'].widget.attrs['placeholder']
-        self.assertEqual(self.USERNAME_TEXT, placeholder)
+    def test_email_placeholder_is_correct(self):
+        placeholder = self.form.fields['email'].widget.attrs['placeholder']
+        self.assertEqual(self.EMAIL_TEXT, placeholder)
 
     def test_password_placeholder_is_correct(self):
         placeholder = self.form.fields['password'].widget.attrs['placeholder']
         self.assertEqual(self.PASSWORD_TEXT, placeholder)
 
     # Test labels
-    def test_username_label_is_correct(self):
-        label = self.form.fields['username'].label
-        self.assertEqual(self.USERNAME_TEXT, label)
+    def test_email_label_is_correct(self):
+        label = self.form.fields['email'].label
+        self.assertEqual(self.EMAIL_TEXT, label)
 
     def test_password_label_is_correct(self):
         label = self.form.fields['password'].label
@@ -33,7 +33,7 @@ class SignupFormUnitTest(TestCase):
 class SignupFormIntegrationTeste(DjangoTesteCase):
     def setUp(self):
         self.form_data = {
-            'username': 'testuser',
+            'first_name': 'Test',
             'last_name': 'User',
             'email': 'testuser@example.com',
             'birth_date': '1990-01-01',
@@ -41,16 +41,6 @@ class SignupFormIntegrationTeste(DjangoTesteCase):
             'gender': 'M',
         }
         return super().setUp()
-
-    def test_field_username_cannot_be_empty(self):
-        self.form_data['username'] = ''
-        response = self.client.post(
-            reverse('user_create'), data=self.form_data, follow=True
-        )
-        self.assertIn(
-            'O nome de usuário não pode ficar em branco.',
-            response.content.decode('utf-8'),
-        )
 
     def test_field_password_cannot_be_empty(self):
         self.form_data['password'] = ''
@@ -74,25 +64,10 @@ class SignupFormIntegrationTeste(DjangoTesteCase):
             response.content.decode('utf-8'),
         )
 
-    def test_field_username_not_register_user_with_email_existing(self):
-        form_data_with_username_existing = self.form_data
-        self.client.post(
-            reverse('user_create'), data=self.form_data, follow=True
-        )
-        response_with_username_existing = self.client.post(
-            reverse('user_create'),
-            data=form_data_with_username_existing,
-            follow=True,
-        )
-        self.assertIn(
-            'Esse nome de usuário já existe.',
-            response_with_username_existing.content.decode('utf-8'),
-        )
-
     def test_user_created_can_login(self):
         self.form_data.update(
             {
-                'username': 'tes_tuser',
+                'email': 'testuser@example.com',
                 'password': '@Pass123',
             }
         )
@@ -102,7 +77,7 @@ class SignupFormIntegrationTeste(DjangoTesteCase):
         )
 
         is_authenticated = self.client.login(
-            username=self.form_data.get('username'),
+            email=self.form_data.get('email'),
             password=self.form_data.get('password'),
         )
 
