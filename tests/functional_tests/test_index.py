@@ -1,4 +1,4 @@
-from ._utils import FunctionalTestBase
+from ..utils import FunctionalTestBase
 
 
 class IndexFunctionalTest(FunctionalTestBase):

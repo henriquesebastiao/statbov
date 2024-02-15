@@ -1,0 +1,11 @@
+[
+  {
+    "model": "app.batch",
+    "pk": 1,
+    "fields": {
+      "farm_id": 1,
+      "diet_id": 1,
+      "obs": "This is a test batch"
+    }
+  }
+]

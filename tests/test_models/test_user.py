@@ -1,98 +1,89 @@
 from django.core.exceptions import ValidationError
-from django.test import TestCase
 
 from statbov.app.models import CustomUser
 
-
-def _create_user(**kwargs):
-    default_args = {
-        'username': 'testuser',
-        'first_name': 'Test',
-        'last_name': 'User',
-        'email': 'testuser@example.com',
-        'birth_date': '1990-01-01',
-        'password': 'testpassword',
-        'gender': 'M',
-    }
-
-    default_args.update(kwargs)
-
-    # Remove args set to None to test registration attempt without NOT NULL attribute
-    for item in kwargs:
-        if kwargs[item] is None:
-            del default_args[item]
-
-    user = CustomUser.objects.create_user(**default_args)
-    user.full_clean()
-
-    return user
+from ..utils import ModelAttrsTest, ModelTest
 
 
-class CustomUserModelTest(TestCase):
+class CustomUserModelTestBase(ModelTest):
+    @classmethod
+    def setUpTestData(cls):
+        cls.MODEL = CustomUser
+        cls.ATTRS = ModelAttrsTest(
+            first_name='Test',
+            last_name='User',
+            email='testuser@example.com',
+            birth_date='1990-01-01',
+            password='testpassword',
+            gender='M',
+        )
+
+
+class CustomUserModelTestCreateSuccess(CustomUserModelTestBase):
     def test_creation_user_success(self):
-        user = _create_user()
+        user = self.create_instance()
         self.assertTrue(isinstance(user, CustomUser))
 
 
-class CustomUserModelTestFirstName(TestCase):
+class CustomUserModelTestFirstName(CustomUserModelTestBase):
     def test_creation_user_without_first_name(self):
         with self.assertRaises(TypeError):
-            _create_user(first_name=None)
+            self.create_instance(first_name=None)
 
     def test_creation_user_blank_first_name(self):
         with self.assertRaises(ValueError):
-            _create_user(first_name='')
+            self.create_instance(first_name='')
 
 
-class CustomUserModelTestLastName(TestCase):
+class CustomUserModelTestLastName(CustomUserModelTestBase):
     def test_creation_user_without_last_name(self):
         with self.assertRaises(TypeError):
-            _create_user(last_name=None)
+            self.create_instance(last_name=None)
 
     def test_creation_user_blank_last_name(self):
         with self.assertRaises(ValueError):
-            _create_user(last_name='')
+            self.create_instance(last_name='')
 
 
-class CustomUserModelTestEmail(TestCase):
+class CustomUserModelTestEmail(CustomUserModelTestBase):
     def test_creation_user_without_email(self):
         with self.assertRaises(TypeError):
-            _create_user(email=None)
+            self.create_instance(email=None)
 
     def test_creation_user_blank_email(self):
         with self.assertRaises(ValueError):
-            _create_user(email='')
+            self.create_instance(email='')
 
 
-class CustomUserModelTestBirthDate(TestCase):
+class CustomUserModelTestBirthDate(CustomUserModelTestBase):
     def test_creation_user_without_birth_date(self):
-        user = _create_user(birth_date=None)
+        user = self.create_instance(birth_date=None)
         self.assertTrue(isinstance(user, CustomUser))
 
     def test_creation_user_blank_birth_date_success(self):
-        user = _create_user()
+        user = self.create_instance()
         self.assertTrue(isinstance(user, CustomUser))
 
 
-class CustomUserModelTestPassword(TestCase):
+class CustomUserModelTestPassword(CustomUserModelTestBase):
     def test_creation_user_without_password(self):
         with self.assertRaises(TypeError):
-            _create_user(password=None)
+            self.create_instance(password=None)
 
     def test_creation_user_blank_password(self):
         with self.assertRaises(ValueError):
-            _create_user(password='')
+            self.create_instance(password='')
 
 
-class CustomUserModelTestGender(TestCase):
+class CustomUserModelTestGender(CustomUserModelTestBase):
     def test_creation_user_without_gender(self):
-        user = _create_user(gender=None)
+        user = self.create_instance(gender=None)
         self.assertTrue(isinstance(user, CustomUser))
 
     def test_creation_user_blank_gender(self):
-        user = _create_user(gender='')
+        user = self.create_instance(gender='')
         self.assertTrue(isinstance(user, CustomUser))
 
     def test_creation_user_with_invalid_gender(self):
         with self.assertRaises(ValidationError):
-            _create_user(gender='X')
+            self.create_instance(gender='X')

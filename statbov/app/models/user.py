@@ -12,6 +12,7 @@ class CustomUser(AbstractUser):
         MA = 'M', 'Masculino'
         FE = 'F', 'Feminino'
 
+    username = None
     first_name = models.CharField(max_length=50, blank=False)
     last_name = models.CharField(max_length=100, blank=False)
     email = models.EmailField(unique=True, blank=False)
@@ -25,17 +26,15 @@ class CustomUser(AbstractUser):
 
     USERNAME_FIELD = 'email'
 
-    REQUIRED_FIELDS = [
-        'first_name',
-        'last_name',
-    ]
+    REQUIRED_FIELDS = ['first_name', 'last_name']
 
     objects = CustomUserManager()
 
     class Meta:
         indexes = [
-            models.Index(fields=['username'], name='username_idx'),
             models.Index(fields=['email'], name='email_idx'),
+            models.Index(fields=['first_name'], name='first_name_idx'),
+            models.Index(fields=['last_name'], name='last_name_idx'),
         ]
 
     def __str__(self):

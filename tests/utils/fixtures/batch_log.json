@@ -1,0 +1,59 @@
+[
+  {
+    "model": "app.customuser",
+    "pk": 1,
+    "fields": {
+      "first_name": "Test",
+      "last_name": "User",
+      "email": "test@user.com",
+      "password": "Test@1234",
+      "gender": "M",
+      "birth_date": "1990-01-01"
+    }
+  },
+  {
+    "model": "app.farmer",
+    "pk": 1,
+    "fields": {
+      "user_id": 1,
+      "cpf": "11111111111",
+      "entry_date": "2024-01-01",
+      "farmer_plan": "FR"
+    }
+  },
+  {
+    "model": "app.farm",
+    "pk": 1,
+    "fields": {
+      "farmer_id": 1,
+      "name": "Test Farm"
+    }
+  },
+  {
+    "model": "app.animal",
+    "pk": 1,
+    "fields": {
+      "farm_origin_id": 1,
+      "race": "NL",
+      "gender": "F",
+      "entry_date": "2021-12-25"
+    }
+  },
+  {
+    "model": "app.diet",
+    "pk": 1,
+    "fields": {
+      "name": "Test Diet",
+      "description": "Test Diet Description"
+    }
+  },
+  {
+    "model": "app.batch",
+    "pk": 1,
+    "fields": {
+      "farm_id": 1,
+      "diet_id": 1,
+      "obs": "Test Batch"
+    }
+  }
+]

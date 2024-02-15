@@ -148,3 +148,5 @@ MESSAGE_TAGS = {
     constants.SUCCESS: 'alert alert-success user-select-none',
     constants.WARNING: 'alert alert-warning user-select-none',
 }
+
+FIXTURE_DIRS = [BASE_DIR / 'tests' / 'utils' / 'fixtures']
