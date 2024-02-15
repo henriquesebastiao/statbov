@@ -6,7 +6,7 @@ authors = ["Henrique Sebastião <contato@henriquesebastiao.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.12.1"
 django = "^5.0.2"
 python-decouple = "^3.8"
 psycopg2-binary = "^2.9.9"
@@ -21,6 +21,12 @@ ruff = "^0.1.14"
 isort = "^5.13.2"
 pytest-django = "^4.7.0"
 selenium = "^4.17.2"
+commitizen = "^3.14.1"
+pydocstyle = "^6.3.0"
+bandit = {extras = ["toml"], version = "^1.7.7"}
+pip-audit = "^2.7.1"
+radon = {extras = ["toml"], version = "^6.0.1"}
+mypy = "^1.8.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -55,11 +61,45 @@ markers = [
     "functional_test: Run tests that are selenium based",
 ]
 
+[tool.commitizen]
+version_provider = "poetry"
+update_changelog_on_bump = true
+style = [
+    ["qmark", "fg:#ff9d00 bold"],
+    ["question", "bold"],
+    ["answer", "fg:#ff9d00 bold"],
+    ["pointer", "fg:#ff9d00 bold"],
+    ["highlighted", "fg:#ff9d00 bold"],
+    ["selected", "fg:#cc5454"],
+    ["separator", "fg:#cc5454"],
+    ["instruction", ""],
+    ["text", ""],
+    ["disabled", "fg:#858585 italic"]
+]
+
+[[tool.mypy.overrides]]
+module = [
+    "django.*",
+    "decouple.*",
+]
+ignore_missing_imports = true
+
 [tool.taskipy.tasks]
-lint = "ruff . && blue --check . --diff && isort --check --diff ."
+lint = "task ruff && task blue && task isort && task pydocstyle"
 format = "blue .  && isort ."
+quality = "task radon && task mypy"
+sec = "task bandit && task pip-audit"
+ruff = "ruff ."
+blue = "blue --check . --diff"
+isort = "isort --check --diff ."
+pydocstyle = "pydocstyle ./tests/utils --count --convention=google --add-ignore=D100,D104,D105,D106,D107"
+radon = "radon cc ./statbov -a -na"
+mypy = "mypy -p statbov -m manage -p tests"
+bandit = "bandit -r ./statbov"
+pip-audit = "pip-audit"
 run = "python manage.py runserver"
-pre_test = "task lint"
+ftest = "pytest -s -x --cov=statbov -vv"
+pre_test = "task lint && task quality && task sec"
 test = "pytest -s -x --cov=statbov -vv"
 post_test = "coverage html"
 functional-test = 'pytest -m "functional_test"'
