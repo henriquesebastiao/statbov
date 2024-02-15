@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db.utils import DataError
+from pytest import mark
 
 from statbov.app.models import Diet
 
@@ -31,6 +32,7 @@ class DietModelTestName(DietModelTestBase):
         with self.assertRaises(ValidationError):
             self.create_instance(name='')
 
+    @mark.not_in_sqlite
     def test_creation_diet_very_long_name(self):
         with self.assertRaises(DataError):
             self.create_instance(name='a' * 21)
@@ -45,6 +47,7 @@ class DietModelTestDescription(DietModelTestBase):
         with self.assertRaises(ValidationError):
             self.create_instance(description='')
 
+    @mark.not_in_sqlite
     def test_creation_diet_very_long_description(self):
         with self.assertRaises(DataError):
             self.create_instance(description='a' * 255)

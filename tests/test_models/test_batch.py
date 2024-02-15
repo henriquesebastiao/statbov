@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db.utils import DataError, IntegrityError
+from pytest import mark
 
 from statbov.app.models import Batch, Diet, Farm
 
@@ -35,6 +36,7 @@ class BatchModelTestId(BatchModelTestBase):
         with self.assertRaises(ValidationError):
             self.create_instance(id='')
 
+    @mark.not_in_sqlite
     def test_creation_batch_very_long_id(self):
         with self.assertRaises(DataError):
             self.create_instance(id='a' * 11)

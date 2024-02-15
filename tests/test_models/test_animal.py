@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db.utils import DataError
+from pytest import mark
 
 from statbov.app.models import Animal, Farm
 
@@ -64,6 +65,7 @@ class AnimalModelTestRace(AnimalModelTestBase):
         with self.assertRaises(ValidationError):
             self.create_instance(race='XX')
 
+    @mark.not_in_sqlite
     def test_creation_animal_very_long_option_race(self):
         with self.assertRaises(DataError):
             self.create_instance(race='GIR')

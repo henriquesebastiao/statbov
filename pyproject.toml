@@ -59,6 +59,7 @@ addopts = "--strict-markers -v"
 norecursedirs = "dist build .* data venv"
 markers = [
     "functional_test: Run tests that are selenium based",
+    "not_in_sqlite: Run tests that are not in postgresql",
 ]
 
 [tool.commitizen]
