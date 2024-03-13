@@ -23,7 +23,13 @@ class ModelAttrsTest:
         clean: Return the attributes without the None values
 
     Example:
-        attrs = ModelAttrsTest(id='1', farm_id='1', diet_id='1', obs='Test', other=None)
+        attrs = ModelAttrsTest(
+            id='1',
+            farm_id='1',
+            diet_id='1',
+            obs='Test',
+            other=None
+        )
         attrs.add(id='2', farm_id='2', diet_id='2')
         print(attrs.clean)
         # {'id': '2', 'farm_id': '2', 'diet_id': '2', 'obs': 'Test'}
@@ -149,7 +155,7 @@ class FunctionalTestBase(LiveServerTestCase):
 
     def tearDown(self) -> None:
         """Quit the browser after the test."""
-        self.browser.quit()  # Is necessary to quit the browser to avoid memory leak
+        self.browser.quit()
         return super().tearDown()
 
     @staticmethod

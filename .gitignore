@@ -186,3 +186,6 @@ pyrightconfig.json
 gunicorn-error-log
 __localcode
 /data/
+
+# VS Code
+.vscode

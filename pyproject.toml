@@ -11,6 +11,7 @@ django = "^5.0.2"
 python-decouple = "^3.8"
 psycopg2-binary = "^2.9.9"
 fontawesomefree = "^6.5.1"
+python-dotenv = "^1.0.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.0.0"
@@ -105,6 +106,6 @@ test = "pytest -s -x --cov=statbov -vv"
 post_test = "coverage html"
 functional-test = 'pytest -m "functional_test"'
 pre-commit = "task test && task functional-test && task export-requirements"
-export-requirements = "rm requirements.txt && poetry export -f requirements.txt --output requirements.txt --without-hashes --without dev"
+export = "rm requirements.txt && poetry export -f requirements.txt --output requirements.txt --without-hashes --without dev"
 makemigrations = "python manage.py makemigrations"
 migrate = "python manage.py migrate"
