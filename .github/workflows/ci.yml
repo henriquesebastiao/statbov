@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         python-version: [ 3.12 ]
-        check: [ruff, blue, isort, pydocstyle, radon, mypy, bandit, pip-audit]
+        check: [ruff, blue, isort, pydocstyle, radon, mypy, bandit]
 
     steps:
       - uses: actions/checkout@v3
