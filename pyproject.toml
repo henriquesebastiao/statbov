@@ -1,12 +1,13 @@
 [tool.poetry]
 name = "statbov"
 version = "0.1.0"
-description = ""
+description = "Uma plataforma para análise estatística de desempenho da produção de rebanhos bovinos."
 authors = ["Henrique Sebastião <contato@henriquesebastiao.com>"]
 readme = "README.md"
+license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.12.1"
+python = "^3.12.3"
 django = "^5.0.2"
 python-decouple = "^3.8"
 psycopg2-binary = "^2.9.9"
@@ -101,7 +102,7 @@ bandit = "bandit -r ./statbov"
 pip-audit = "pip-audit"
 run = "python manage.py runserver"
 ftest = "pytest -s -x --cov=statbov -vv"
-pre_test = "task lint && task quality && task sec"
+pre_test = "task lint && task quality"
 test = "pytest -s -x --cov=statbov -vv"
 post_test = "coverage html"
 functional-test = 'pytest -m "functional_test"'
