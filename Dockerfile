@@ -1,4 +1,4 @@
-FROM python:3.12.1-alpine3.19
+FROM python:3.12.3-alpine3.19
 LABEL mantainer="contato@henriquesebastiao.com"
 
 # Essa variável de ambiente é usada para controlar se o Python deve
@@ -37,6 +37,7 @@ RUN python -m venv /venv && \
 # Adiciona a pasta scripts e venv/bin
 # no $PATH do container.
 ENV PATH="/scripts:/venv/bin:$PATH"
+ENV PYTHONPATH="/venv/bin/python"
 
 # Executa o arquivo scripts/commands.sh
 CMD ["commands.sh"]
