@@ -2,6 +2,8 @@
 
 [![CI](https://github.com/henriquesebastiao/statbov/actions/workflows/ci.yml/badge.svg)](https://github.com/henriquesebastiao/statbov/actions/workflows/ci.yml)
 [![codecov](https://codecov.io/gh/henriquesebastiao/statbov/graph/badge.svg?token=PNjl5Z61RQ)](https://codecov.io/gh/henriquesebastiao/statbov)
+[![codecov](https://img.shields.io/badge/Python-3.12.3-blue)]()
+[![codecov](https://img.shields.io/badge/Django-5.0.4-blue)]()
 [![LICENSE](https://img.shields.io/badge/license-MIT-green)](https://github.com/henriquesebastiao/statbov/blob/main/LICENSE)
 
 Statbov é um projeto para pecuária de precisão com análise de métricas.
