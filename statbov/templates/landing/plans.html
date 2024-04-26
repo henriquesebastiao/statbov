@@ -1,0 +1,287 @@
+{% extends 'base/lading.html' %}
+{% load static %}
+{% block extend_head %}
+    <link href="{% static 'css/landing/plans.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block title %}
+    Planos | Statbov
+{% endblock %}
+{% block main-container %}
+    <header>
+        <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+            <h1 class="display-4 fw-normal text-body-emphasis">Planos</h1>
+            <p class="fs-5 text-body-secondary">
+                Encontre o plano perfeito para sua fazenda de maneira simples e eficaz!
+            </p>
+            <p class="fs-5 text-body-secondary">
+                Nossos planos e preços são
+                projetados para se adaptarem às demandas específicas de cada perfil de pecuarista. Explore as opções
+                abaixo e solicite uma demonstração agora mesmo.
+            </p>
+        </div>
+    </header>
+    <main>
+        <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm card-plan" id="card-free-plan">
+                    <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">Grátis</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">R$0<small
+                                class="text-body-secondary fw-light">/mês</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>1 usuário incluso</li>
+                            <li>Até 200 animais</li>
+                            <li>1 propriedade</li>
+                        </ul>
+                        <button type="button" class="w-100 btn btn-lg btn-outline-primary">Registre-se grátis</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm card-plan" id="card-professional-plan">
+                    <div class="card-header py-3">
+                        <h4 class="my-0 fw-normal">Profissional</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">R$30<small
+                                class="text-body-secondary fw-light">/mês</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li></li>
+                            <li>10 usuários inclusos</li>
+                            <li>Até 500 animais</li>
+                            <li>5 propriedades</li>
+                        </ul>
+                        <button type="button" class="w-100 btn btn-lg btn-primary">Começar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card mb-4 rounded-3 shadow-sm border-primary card-plan" id="card-business-plan">
+                    <div class="card-header py-3 text-bg-primary border-primary">
+                        <h4 class="my-0 fw-normal">Empresas</h4>
+                    </div>
+                    <div class="card-body">
+                        <h1 class="card-title pricing-card-title">R$100<small
+                                class="text-body-secondary fw-light">/mês</small></h1>
+                        <ul class="list-unstyled mt-3 mb-4">
+                            <li>Usuários <span class="text-primary-emphasis">ilimitados</span></li>
+                            <li>Animais <span class="text-primary-emphasis">ilimitados</span></li>
+                            <li>Propriedades <span class="text-primary-emphasis">ilimitadas</span></li>
+                        </ul>
+                        <button type="button" class="w-100 btn btn-lg btn-primary">Entrar em contato</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="display-6 text-center mb-4" id="comparison-plans-title">Compare os planos</h2>
+
+        <div class="table-responsive">
+            <table class="table text-center" id="comparison-plans-table">
+                <thead>
+                <tr>
+                    <th style="width: 34%;" class="text-start">Funcionalidade</th>
+                    <th style="width: 22%;">Grátis</th>
+                    <th style="width: 22%;">Profissional</th>
+                    <th style="width: 22%;">Empresas</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row" class="text-start">Coleta de dados on-line</th>
+                    <td>
+                        <svg class="bi" width="24" height="24">
+                            <use href="#check">
+                                <symbol id="check" viewBox="0 0 16 16">
+                                    <title>Check</title>
+                                    <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"></path>
+                                </symbol>
+                            </use>
+                        </svg>
+                    </td>
+                    <td>
+                        <svg class="bi" width="24" height="24">
+                            <use href="#check"></use>
+                        </svg>
+                    </td>
+                    <td>
+                        <svg class="bi" width="24" height="24">
+                            <use href="#check"></use>
+                        </svg>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="text-start">Acompanhamento dos registros</th>
+                    <td>
+                        <svg class="bi" width="24" height="24">
+                            <use href="#check"></use>
+                        </svg>
+                    </td>
+                    <td>
+                        <svg class="bi" width="24" height="24">
+                            <use href="#check"></use>
+                        </svg>
+                    </td>
+                    <td>
+                        <svg class="bi" width="24" height="24">
+                            <use href="#check"></use>
+                        </svg>
+                    </td>
+                </tr>
+                </tbody>
+
+                <tbody>
+                <tr>
+                    <th scope="row" class="text-start">Relatório de desempenho reprodutivo</th>
+                    <td>
+                        <svg class="bi" width="24" height="24">
+                            <use href="#check"></use>
+                        </svg>
+                    </td>
+                    <td>
+                        <svg class="bi" width="24" height="24">
+                            <use href="#check"></use>
+                        </svg>
+                    </td>
+                    <td>
+                        <svg class="bi" width="24" height="24">
+                            <use href="#check"></use>
+                        </svg>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="text-start">Relatório de ganho de peso</th>
+                    <td></td>
+                    <td>
+                        <svg class="bi" width="24" height="24">
+                            <use href="#check"></use>
+                        </svg>
+                    </td>
+                    <td>
+                        <svg class="bi" width="24" height="24">
+                            <use href="#check"></use>
+                        </svg>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="text-start">Relatório de manejos</th>
+                    <td></td>
+                    <td>
+                        <svg class="bi" width="24" height="24">
+                            <use href="#check"></use>
+                        </svg>
+                    </td>
+                    <td>
+                        <svg class="bi" width="24" height="24">
+                            <use href="#check"></use>
+                        </svg>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="text-start">Custeio de produção individual por animal</th>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <svg class="bi" width="24" height="24">
+                            <use href="#check"></use>
+                        </svg>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="text-start">Acompanhamento financeiro</th>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <svg class="bi" width="24" height="24">
+                            <use href="#check"></use>
+                        </svg>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="text-start">Tendências de preços do mercado</th>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <svg class="bi" width="24" height="24">
+                            <use href="#check"></use>
+                        </svg>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="text-start">Quantidade ilimitada de animais</th>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <svg class="bi" width="24" height="24">
+                            <use href="#check"></use>
+                        </svg>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="text-start">Número ilimitado de propriedades</th>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <svg class="bi" width="24" height="24">
+                            <use href="#check"></use>
+                        </svg>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row" class="text-start">Número ilimitado de usuários</th>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <svg class="bi" width="24" height="24">
+                            <use href="#check"></use>
+                        </svg>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="pt-4 my-md-5 pt-md-5 border-top">
+        <div class="row">
+            <div class="col-12 col-md">
+                <div class="col-md-3 mb-2 mb-md-0">
+                    <a href="{% url 'index' %}" class="d-inline-flex link-body-emphasis text-decoration-none">
+                        <span class="fs-5 fw-bold">Statbov</span>
+                    </a>
+                </div>
+                <small class="d-block mb-3 text-body-secondary">© 2024</small>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Features</h5>
+                <ul class="list-unstyled text-small">
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Cool stuff</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Random feature</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Team feature</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Stuff for developers</a>
+                    </li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another one</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Last time</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Resources</h5>
+                <ul class="list-unstyled text-small">
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Resource name</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Another resource</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Final resource</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <h5>Sobre nós</h5>
+                <ul class="list-unstyled text-small">
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="https://github.com/henriquesebastiao/statbov">GitHub</a></li>
+                    <li class="mb-1"><a class="link-secondary text-decoration-none" href="#">Privacy</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+{% endblock %}

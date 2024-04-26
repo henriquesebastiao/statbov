@@ -1,0 +1,16 @@
+.bi {
+    vertical-align: -.125em;
+    fill: currentColor;
+}
+
+.card-plan {
+    transition: transform 0.3s ease-in-out;
+}
+
+.card-plan:hover {
+    transform: scale(1.05);
+}
+
+.card-plan:focus {
+    transform: scale(1.05);
+}

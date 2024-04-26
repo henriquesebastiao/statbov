@@ -50,8 +50,8 @@
                 {% block text_button %}{% endblock %}
             </button>
             <div class="text-center mt-3 d-flex justify-content-center align-items-center flex-column flex-md-row">
-                <div class="">{% block question_text %}{% endblock %}</div>
-                <div class=""><a href="{% block link_redirect %}{% endblock %}" class="text-decoration-none ms-md-1">
+                <div class="user-select-none">{% block question_text %}{% endblock %}</div>
+                <div class="user-select-none"><a href="{% block link_redirect %}{% endblock %}" class="text-decoration-none ms-md-1">
                     {% block text_link_redirect %}{% endblock %}</a></div>
             </div>
         </form>
