@@ -167,15 +167,16 @@ class FunctionalTestBase(LiveServerTestCase):
         """
         time.sleep(seconds)
 
-    def get_content(self, html_tag_name: str, url: str = ''):
-        """Method to get the content of an HTML tag.
+    def get_content(self, by: By, search_element: str, url: str):
+        """Method to get the content in a page.
 
         Args:
-            html_tag_name: HTML tag name to get the content
+            by: Type of search element
+            search_element: Element to be searched
             url: URL to get the content
 
         Returns:
-            content of an HTML tag
+            content of search element
         """
         self.browser.get(self.live_server_url + url)
-        return self.browser.find_element(By.TAG_NAME, html_tag_name)
+        return self.browser.find_element(by, search_element)
