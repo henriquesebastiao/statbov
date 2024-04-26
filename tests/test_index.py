@@ -14,5 +14,5 @@ class IndexTest(TestCase):
 
     def test_if_view_index_load_correct_template(self):
         self.assertTemplateUsed(
-            self.client.get(reverse('index')), 'index.html'
+            self.client.get(reverse('index')), 'landing/index.html'
         )
