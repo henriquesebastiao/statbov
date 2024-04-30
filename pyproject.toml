@@ -15,7 +15,7 @@ fontawesomefree = "^6.5.1"
 python-dotenv = "^1.0.1"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.1.2"
+pytest = "^8.2.0"
 pytest-cov = "^4.1.0"
 taskipy = "^1.12.2"
 blue = "^0.9.1"
