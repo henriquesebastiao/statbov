@@ -23,7 +23,7 @@ ruff = "^0.1.15"
 isort = "^5.13.2"
 pytest-django = "^4.8.0"
 selenium = "^4.20.0"
-commitizen = "^3.24.0"
+commitizen = "^3.25.0"
 pydocstyle = "^6.3.0"
 bandit = {extras = ["toml"], version = "^1.7.8"}
 pip-audit = "^2.7.3"
