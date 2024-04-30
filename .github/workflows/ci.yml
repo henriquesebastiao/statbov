@@ -12,7 +12,7 @@ jobs:
         check: [ruff, blue, isort, pydocstyle, radon, mypy, bandit]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v3
         with:
@@ -45,7 +45,7 @@ jobs:
       POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
       ALLOWED_HOSTS: ${{ secrets.ALLOWED_HOSTS }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v3
         with:
