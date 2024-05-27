@@ -106,6 +106,7 @@ test = "pytest -s -x --cov=statbov -vv"
 post_test = "coverage html"
 functional-test = 'pytest -m "functional_test"'
 pre-commit = "task test && task functional-test && task export-requirements"
-export = "rm requirements.txt && poetry export -f requirements.txt --output requirements.txt --without-hashes --without dev"
+export-requirements = "rm requirements.txt && poetry export -f requirements.txt --output requirements.txt --without-hashes --without dev"
 makemigrations = "python manage.py makemigrations"
 migrate = "python manage.py migrate"
+update = "poetry update && task export-requirements"
