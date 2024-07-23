@@ -27,6 +27,7 @@ pydocstyle = "^6.3.0"
 bandit = {extras = ["toml"], version = "^1.7.8"}
 radon = {extras = ["toml"], version = "^6.0.1"}
 mypy = "^1.10.0"
+requests = "^2.32.3"
 
 [build-system]
 requires = ["poetry-core"]
@@ -108,3 +109,4 @@ export-requirements = "rm requirements.txt && poetry export -f requirements.txt 
 makemigrations = "python manage.py makemigrations"
 migrate = "python manage.py migrate"
 update = "poetry update && task export-requirements"
+update-chromedriver = "python scripts/update_chromedriver.py"
