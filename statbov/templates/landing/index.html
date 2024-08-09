@@ -1,7 +1,17 @@
 {% extends 'base/lading.html' %}
+{% load static %}
+{% block extend_head %}
+    <link href="{% static 'css/landing/index.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
 {% block title %}
     Início | Statbov
 {% endblock %}
 {% block main-container %}
-    <div class="position-absolute top-50 start-50 translate-middle fs-3">Início</div>
+    <div class="position-absolute top-50 start-50 translate-middle text-center">
+        <div>
+            <h1>A tecnologia aliada a pecuária.</h1>
+            <h2 class="fs-5">Potencialize o poder do seu rebanho com a nossa ferramenta de gestão de gado: simplifique, mensure e supere!</h2>
+            <a class="start-now-btn btn btn-primary" href="{% url 'signup' %}">Começar agora <i class="arrow-space-left fa-solid fa-arrow-right"></i></a>
+        </div>
+    </div>
 {% endblock %}
