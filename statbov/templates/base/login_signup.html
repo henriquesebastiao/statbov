@@ -7,8 +7,8 @@
     <body class="align-items-center">
     <div class="login-container position-absolute top-50 start-50 translate-middle">
         <div class="text-center">
-            <a class="fs-1 fw-bold text-decoration-none text-white user-select-none" tabindex="-1" href="{% url 'index' %}">Statbov</a>
-            <div class="fs-4 mb-3 user-select-none">{% block call_to_action %}{% endblock %}</div>
+            <a class="fs-1 fw-bold text-decoration-none text-white" tabindex="-1" href="{% url 'index' %}">Statbov</a>
+            <div class="fs-4 mb-3">{% block call_to_action %}{% endblock %}</div>
         </div>
         <!-- Messages -->
         <div>
@@ -50,8 +50,8 @@
                 {% block text_button %}{% endblock %}
             </button>
             <div class="text-center mt-3 d-flex justify-content-center align-items-center flex-column flex-md-row">
-                <div class="user-select-none">{% block question_text %}{% endblock %}</div>
-                <div class="user-select-none"><a href="{% block link_redirect %}{% endblock %}" class="text-decoration-none ms-md-1">
+                <div>{% block question_text %}{% endblock %}</div>
+                <div><a href="{% block link_redirect %}{% endblock %}" class="text-decoration-none ms-md-1">
                     {% block text_link_redirect %}{% endblock %}</a></div>
             </div>
         </form>
