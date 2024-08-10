@@ -1,7 +1,21 @@
 {% extends 'base/lading.html' %}
+{% load static %}
 {% block title %}
     Suporte | Statbov
 {% endblock %}
 {% block main-container %}
-    <div class="position-absolute top-50 start-50 translate-middle fs-3">Suporte</div>
+    <div class="position-absolute top-50 start-50 translate-middle text-center w-25">
+        <h1>Fale conosco.</h1>
+        <h2 class="fs-5 mt-4">Envie-nos um E-mail:</h4>
+        <form onsubmit="sendEmail(); return false;">
+            <label class="form-label" for="subject">Assunto:</label><br>
+            <input class="form-control text-center" type="text" id="subject" name="subject" required><br><br>
+
+            <label class="form-label" for="message">Mensagem:</label><br>
+            <textarea class="form-control text-center" id="message" name="message" rows="5" required></textarea><br><br>
+
+            <button class="btn btn-primary" type="submit">Enviar</button>
+        </form>
+        <script src="{% static 'js/landing/support.js' %}"></script>
+    </div>
 {% endblock %}
