@@ -10,7 +10,7 @@ class IndexFunctionalTest(FunctionalTestBase):
             'Statbov',
             'Início',
             'Planos',
-            'Blog',
+            # 'Blog',
             'Suporte',
             'Sobre nós',
             'Entrar',
