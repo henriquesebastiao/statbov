@@ -6,34 +6,47 @@
 {% block body %}
     <main class="flex-nowrap d-flex">
         <!-- Sidebar -->
-        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark bg-body-secondary" style="width: 280px;">
+        <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark bg-body-secondary shadow-sm" style="width: 280px;">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                 <span class="fs-4 fw-bold">Statbov</span>
             </a>
+            <span style="width: 40%;" class="badge bg-info-subtle border border-info-subtle text-info-emphasis rounded-pill">Experimental</span>
             <hr>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li>
-                    <a href="#" class="nav-link active text-white">
+                    <a href="#" class="nav-link active text-white" onclick="showContent('dashboard')">
                         <i class="fa-solid fa-gauge me-2 bi pe-none"></i>
                         Dashboard
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white">
-                        <i class="fa-solid fa-table me-2 bi pe-none"></i>
-                        Orders
+                    <a href="#" class="nav-link text-white link-body-emphasis" onclick="showContent('animais')">
+                        <i class="fa-solid fa-cow me-2 bi pe-none"></i>
+                        Animais
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white">
+                    <a href="#" class="nav-link text-white link-body-emphasis" onclick="showContent('produtos')">
                         <i class="fa-solid fa-boxes-stacked me-2 bi pe-none"></i>
-                        Products
+                        Produtos
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white">
+                    <a href="#" class="nav-link text-white link-body-emphasis" onclick="showContent('properties')">
+                        <i class="fa-solid fa-leaf me-2 bi pe-none"></i>
+                        Propriedades
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link text-white link-body-emphasis" onclick="showContent('pessoal')">
                         <i class="fa-solid fa-user me-2 bi pe-none"></i>
-                        Customers
+                        Pessoal
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="nav-link text-white link-body-emphasis" onclick="showContent('settings')">
+                        <i class="fa-solid fa-gear me-2 bi pe-none"></i>
+                        Configurações
                     </a>
                 </li>
             </ul>
@@ -56,11 +69,96 @@
                 </ul>
             </div>
         </div>
-        <!-- Main content -->
-        <div class="w-100 container-fluid">
-            <div>
-                TESTE
+        <!-- Dashboard -->
+        <div id="dashboard" class="content w-100 container-fluid">
+            <div class="position-relative d-flex justify-content-center top-50">
+                DASHBOARD
             </div>
         </div>
+        <!-- Animais -->
+        <div id="animais" class="content w-100 container-fluid" style="display: none;">
+            <div class="position-relative d-flex justify-content-center top-50">
+                ANIMAIS
+            </div>
+        </div>
+        <!-- Produtos -->
+        <div id="produtos" class="content w-100 container-fluid" style="display: none;">
+            <div class="position-relative d-flex justify-content-center top-50">
+                PRODUTOS
+            </div>
+        </div>
+        <!-- Farm -->
+        <div id="properties" class="content w-100 container-fluid" style="display: none;">
+            <div class="position-relative d-flex justify-content-center top-50 start-50 translate-middle">
+                <div class="card w-75 bg-body-secondary shadow-sm d-flex flex-row">
+                    <div class="border-end d-flex justify-content-center align-items-center w-50 flex-column">
+                        <!-- <h2 class="fs-5">Fazendas cadastradas</h2> -->
+                        <i class="fa-solid fa-face-sad-tear fs-1"></i>
+                        <span class="fs-5 mt-3">Nenhuma fazenda cadastrada</span>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center w-50">
+                        <form action="#">
+                            {% csrf_token %}
+                            <div class="m-3">
+                                <h2 class="fs-5">Cadastre uma nova fazenda:</h2>
+                                <div class="mb-3">
+                                    <label class="form-label">Nome da fazenda</label>
+                                    <input type="email" class="form-control" id="" placeholder="Fazenda Exemplo">
+                                </div>
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Estado</option>
+                                    <option value="1">Acre</option>
+                                    <option value="2">Alagoas</option>
+                                    <option value="3">Amapá</option>
+                                    <option value="4">Amazonas</option>
+                                    <option value="5">Bahia</option>
+                                    <option value="6">Ceará</option>
+                                    <option value="7">Distrito Federal</option>
+                                    <option value="8">Espírito Santo</option>
+                                    <option value="9">Goiás</option>
+                                    <option value="10">Maranhão</option>
+                                    <option value="11">Mato Grosso</option>
+                                    <option value="12">Mato Grosso do Sul</option>
+                                    <option value="13">Minas Gerais</option>
+                                    <option value="14">Pará</option>
+                                    <option value="15">Paraíba</option>
+                                    <option value="16">Paraná</option>
+                                    <option value="17">Pernambuco</option>
+                                    <option value="18">Piauí</option>
+                                    <option value="19">Rio de Janeiro</option>
+                                    <option value="20">Rio Grande do Norte</option>
+                                    <option value="21">Rio Grande do Sul</option>
+                                    <option value="22">Rondônia</option>
+                                    <option value="23">Roraima</option>
+                                    <option value="24">Santa Catarina</option>
+                                    <option value="25">São Paulo</option>
+                                    <option value="26">Sergipe</option>
+                                    <option value="27">Tocantins</option>
+                                </select>
+                                <button type="submit" class="btn btn-primary mt-3">
+                                    Cadastrar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+            </div>                
+        </div>
+        <!-- Pessoal -->
+        <div id="pessoal" class="content w-100 container-fluid" style="display: none;">
+            <div class="position-relative d-flex justify-content-center top-50">
+                PESSOAL
+            </div>
+        </div> 
+        <!-- Settings -->
+        <div id="settings" class="content w-100 container-fluid" style="display: none;">
+            <div class="position-relative d-flex justify-content-center top-50">
+                <div class="card bg-body-secondary shadow-sm w-75">
+                    TESTE
+                </div>
+            </div>
+        </div>       
     </main>
+    <script src="{% static 'js/app.js' %}"></script>
 {% endblock %}
