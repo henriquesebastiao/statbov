@@ -25,7 +25,7 @@ jobs:
           poetry install
       - name: Run checks
         run: |
-          task ${{ matrix.check }}
+          poetry run task ${{ matrix.check }}
 
   tests:
     name: Tests
@@ -58,10 +58,10 @@ jobs:
           poetry install
       - name: Run Tests
         run: |
-          python manage.py collectstatic --noinput
-          python manage.py check
-          python manage.py migrate
-          pytest -m "not functional_test and not not_in_sqlite" -s -x --cov=statbov -vv
+          poetry run python manage.py collectstatic --noinput
+          poetry run python manage.py check
+          poetry run python manage.py migrate
+          poetry run pytest -m "not functional_test and not not_in_sqlite" -s -x --cov=statbov -vv
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4
         env:
