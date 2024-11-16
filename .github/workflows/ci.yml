@@ -63,7 +63,7 @@ jobs:
           poetry run python manage.py migrate
           poetry run pytest -m "not functional_test and not not_in_sqlite" -s -x --cov=statbov -vv
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
