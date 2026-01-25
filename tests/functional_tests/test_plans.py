@@ -7,9 +7,12 @@ class PlansFunctionalTest(FunctionalTestBase):
     def test_content_pricing_header_plans_page(self):
         content = self.get_content(By.CLASS_NAME, 'pricing-header', '/plans/')
         words = [
-            'Encontre o plano perfeito para sua fazenda de maneira simples e eficaz!',
-            'Nossos planos e preços são projetados para se adaptarem às demandas específicas de cada perfil de '
-            'pecuarista. Explore as opções abaixo e solicite uma demonstração agora mesmo.',
+            'Encontre o plano perfeito para sua '
+            'fazenda de maneira simples e eficaz!',
+            'Nossos planos e preços são projetados para se adaptarem '
+            'às demandas específicas de cada perfil de '
+            'pecuarista. Explore as opções abaixo e '
+            'solicite uma demonstração agora mesmo.',
         ]
         for word in words:
             self.assertIn(word, content.text)

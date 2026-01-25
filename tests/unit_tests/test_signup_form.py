@@ -1,4 +1,5 @@
-from django.test import TestCase, TestCase as DjangoTesteCase
+from django.test import TestCase
+from django.test import TestCase as DjangoTesteCase
 from django.urls import reverse
 
 from statbov.app.forms import SignupForm
@@ -65,12 +66,10 @@ class SignupFormIntegrationTeste(DjangoTesteCase):
         )
 
     def test_user_created_can_login(self):
-        self.form_data.update(
-            {
-                'email': 'testuser@example.com',
-                'password': '@Pass123',
-            }
-        )
+        self.form_data.update({
+            'email': 'testuser@example.com',
+            'password': '@Pass123',
+        })
 
         self.client.post(
             reverse('user_create'), data=self.form_data, follow=True
