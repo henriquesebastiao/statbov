@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   django-statbov:
     container_name: django-statbov
@@ -22,6 +20,6 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./data/postgres/data:/var/lib/postgresql/data/
+      - ./data/postgres/18/docker:/var/lib/postgresql/18/docker
     env_file:
       - .env
