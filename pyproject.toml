@@ -8,26 +8,22 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.12.3"
-django = "^5.1"
+django = "^5.2.10"
 python-decouple = "^3.8"
-psycopg2-binary = "^2.9.9"
+psycopg2-binary = "^2.9.11"
 fontawesomefree = "^6.6.0"
-python-dotenv = "^1.0.1"
+python-dotenv = "^1.2.1"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.3.2"
-pytest-cov = "^6.0.0"
-taskipy = "^1.13.0"
-blue = "^0.9.1"
-ruff = "^0.7.0"
-isort = "^5.13.2"
-pytest-django = "^4.8.0"
-selenium = "^4.23.1"
-pydocstyle = "^6.3.0"
-bandit = {extras = ["toml"], version = "^1.7.9"}
+pytest = "^8.4.2"
+pytest-cov = "^6.3.0"
+taskipy = "^1.14.1"
+ruff = "^0.7.4"
+pytest-django = "^4.11.1"
+selenium = "^4.40.0"
 radon = {extras = ["toml"], version = "^6.0.1"}
-mypy = "^1.11.1"
-requests = "^2.32.3"
+mypy = "^1.19.1"
+requests = "^2.32.5"
 
 [build-system]
 requires = ["poetry-core"]
@@ -37,13 +33,21 @@ build-backend = "poetry.core.masonry.api"
 line-length = 79
 exclude = ['migrations', '__init__.py']
 
-[tool.isort]
-profile = "django"
-line_length = 79
-extend_skip = ['migrations']
+[tool.ruff.lint]
+preview = true
+select = ['I', 'F', 'E', 'W']
 
-[tool.blue]
-extend-exclude = '(migrations/)'
+[tool.ruff.format]
+preview = true
+quote-style = 'single'
+
+[tool.ruff.lint.per-file-ignores]
+"security.py" = ["E501"]
+"user_phone.py" = ["E501"]
+"user_address.py" = ["E501"]
+"login.py" = ["E501"]
+"signup.py" = ["E501"]
+"batch_log.py" = ["E501"]
 
 [tool.coverage.run]
 branch = true
@@ -87,17 +91,11 @@ module = [
 ignore_missing_imports = true
 
 [tool.taskipy.tasks]
-lint = "task ruff && task blue && task isort && task pydocstyle"
-format = "blue .  && isort ."
+format = "ruff format .; ruff check . --fix"
 quality = "task radon && task mypy"
-sec = "task bandit && task pip-audit"
-ruff = "ruff check ."
-blue = "blue --check . --diff"
-isort = "isort --check --diff ."
-pydocstyle = "pydocstyle ./tests/utils --count --convention=google --add-ignore=D100,D104,D105,D106,D107"
+lint = "ruff check . && ruff check . --diff"
 radon = "radon cc ./statbov -a -na"
 mypy = "mypy -p statbov -m manage -p tests"
-bandit = "bandit -r ./statbov"
 run = "python manage.py runserver"
 pre_test = "task lint && task quality"
 test = 'export POSTGRES_HOST="localhost" && pytest -s -x --cov=statbov -vv'
