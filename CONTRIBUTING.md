@@ -170,6 +170,12 @@ POSTGRES_HOST="postgres-statbov"
 POSTGRES_PORT="5432"
 ```
 
+Alternativamente, caso esteja no linux, para criar o arquivo `.env` automaticamente execute o seguinte comando na raiz do projeto:
+
+```shell
+cat .env.example > .env
+```
+
 Agora você pode executar o Docker Compose:
 
 ```bash
@@ -190,7 +196,7 @@ python -c "import string as s;from random import SystemRandom as sr;print(''.joi
 
 Recomenda-se substituir todas as aspas (simples e duplas) por letras ou outros caracteres para evitar problemas de leitura da chave.
 
-#### Menagens de commit
+#### Mensagens de commit
 
 **Apenas uma recomendação...**
 
