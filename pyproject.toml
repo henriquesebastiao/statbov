@@ -17,7 +17,6 @@ python-dotenv = "^1.2.1"
 [tool.poetry.group.dev.dependencies]
 pytest = "^9.0.2"
 pytest-cov = "^7.0.0"
-taskipy = "^1.14.1"
 ruff = "^0.14.14"
 pytest-django = "^4.11.1"
 selenium = "^4.40.0"
@@ -89,21 +88,3 @@ module = [
     "decouple.*",
 ]
 ignore_missing_imports = true
-
-[tool.taskipy.tasks]
-format = "ruff format .; ruff check . --fix"
-quality = "task radon && task mypy"
-lint = "ruff check . && ruff check . --diff"
-radon = "radon cc ./statbov -a -na"
-mypy = "mypy -p statbov -m manage -p tests"
-run = "python manage.py runserver"
-pre_test = "task lint && task quality"
-test = 'export POSTGRES_HOST="localhost" && pytest -s -x --cov=statbov -vv'
-post_test = "coverage html"
-functional-test = 'export POSTGRES_HOST="localhost" && pytest -m "functional_test"'
-pre-commit = "task test && task functional-test && task export-requirements"
-export-requirements = "rm requirements.txt && poetry export -f requirements.txt --output requirements.txt --without-hashes --without dev"
-makemigrations = "python manage.py makemigrations"
-migrate = "python manage.py migrate"
-update = "poetry update && task export-requirements"
-update-chromedriver = "python scripts/update_chromedriver.py"

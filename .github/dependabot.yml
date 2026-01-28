@@ -19,7 +19,7 @@ updates:
     assignees:
       - "henriquesebastiao"
     exclude-paths:
-       - "requirements.txt"
+      - "requirements.txt"
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
